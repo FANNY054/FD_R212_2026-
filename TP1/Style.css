@@ -1,0 +1,118 @@
+:root {
+  /* Couleurs */
+  background-color: #F5F5DC;
+  --color-primary: #2563eb;
+  --color-text: #1f2937;
+  --color-text-light: #6b7280;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f9fafb;
+  font-family: Georgia;
+
+  /* Espacements */
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  /* Typographie */
+  --font-base: system-ui, -apple-system, sans-serif;
+  --line-height: 1.4;
+}
+
+body {
+  font-family: var(--font-base);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  margin: 0;
+  text-align: center; 
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background-color: #FB4C0D;
+  margin: 0px;
+  flex: 1;
+}
+
+header ul nav {
+ display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;  
+}
+
+header nav ul li a {
+  color: #F5F5DC;
+}
+
+
+nav ul {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  list-style: none;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  color: #FB4C0D;
+  font-family: Mirama;
+}
+
+.hero {
+}
+
+.projets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.projets h2 {
+  grid-column: 1 / -1;
+}
+
+footer {
+  background-color: #FB4C0D;
+  color: #F5F5DC;
+  text-align: center;
+  padding: 2rem 3rem;
+  border-top: 3px solid var(--color-orange);
+}
+
+footer nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;  
+}
+
+footer nav ul li a {
+  color: #F5F5DC;
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  nav ul {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .projets {
+    grid-template-columns: 1fr;
+  }
+
+  .apropos-contenu {
+    flex-direction: column;
+    align-items: center;
+  }
+}
