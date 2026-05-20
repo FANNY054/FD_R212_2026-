@@ -4,32 +4,15 @@
 
 ### 1. [Titre du premier point]
 
-[Explication en 1-2 phrases avec vos mots.]
+Le modèle Événement + État + Rendu
+Un événement (clic, touche clavier) modifie un état (ouvert/fermé), et c'est une classe CSS qui traduit cet état visuellement. Le JS gère la logique, le CSS gère l'apparence — les deux ne se mélangent pas.
 
 ### 2. [Titre du deuxième point]
 
-[Explication en 1-2 phrases avec vos mots.]
-### 3. [Titre du troisième point]
+querySelectorAll + forEach pour agir sur plusieurs éléments
+Quand on a plusieurs éléments similaires (comme les questions d'un accordéon), querySelectorAll les sélectionne tous d'un coup et forEach permet d'appliquer la même chose a chacun sans répéter le code.
 
-[Explication en 1-2 phrases avec vos mots.]
- 
+
 ## Utilisation de l'IA
 
-### Démarche
-
-[Quel outil avez-vous utilisé ? (modèle, version, interface) Dans quel but : comprendre un concept,
-déboguer, générer du code, reformuler, autre ?]
-
-### Apports et limites
-
-[Ce que l'IA vous a aidé à faire. Ce qui n'a pas fonctionné ou
-que vous avez dû corriger vous-même.]
-
-### Prompts significatifs
-
-1. "[Prompt]" → [Ce que ça a donné / pourquoi ce prompt était utile]
-2. "[Prompt]" → [Ce que ça a donné]
-3. "[Prompt]" → [Ce que ça a donné]
-
-<!-- Si aucune IA n'a été utilisée, remplacez tout le bloc ci-dessus par :
-"Aucune IA utilisée lors de cette séance." -->
+"Aucune IA utilisée lors de cette séance." 
