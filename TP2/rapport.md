@@ -2,12 +2,12 @@
 
 ## Points clés
 
-### 1. [Titre du premier point]
+### 1. evenment, etat et rendu 
 
 Le modèle Événement + État + Rendu
 Un événement (clic, touche clavier) modifie un état (ouvert/fermé), et c'est une classe CSS qui traduit cet état visuellement. Le JS gère la logique, le CSS gère l'apparence — les deux ne se mélangent pas.
 
-### 2. [Titre du deuxième point]
+### 2. querySelectorAll + forEach
 
 querySelectorAll + forEach pour agir sur plusieurs éléments
 Quand on a plusieurs éléments similaires (comme les questions d'un accordéon), querySelectorAll les sélectionne tous d'un coup et forEach permet d'appliquer la même chose a chacun sans répéter le code.
