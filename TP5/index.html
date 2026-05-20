@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Portfolio | MMI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="main-header">
+    <h1>Design & Code</h1>
+    <nav>
+      <ul>
+        <li><a href="#projets">Mes Travaux</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="projets">
+      <h2>Mes Projets</h2>
+      
+      <div class="filters">
+        <button class="filter-btn active" data-tag="all">Tous</button>
+        <button class="filter-btn" data-tag="Web">Web</button>
+        <button class="filter-btn" data-tag="Design">Design</button>
+      </div>
+
+      <div id="project-grid" class="grid">
+        <!-- JS va remplir ici -->
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <p>© 2026 - Créé avec ❤️ en MMI</p>
+  </footer>
+
+  <!-- Modale d'accessibilité -->
+  <dialog id="project-modal">
+    <div class="modal-content">
+      <button id="close-modal" aria-label="Fermer">×</button>
+      <div id="modal-data"></div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
