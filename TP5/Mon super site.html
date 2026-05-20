@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon portfolio corrigé</title>
+  <style>
+    :root {
+      --color-dark: #1a1a2e;
+      --color-light: #f4f4f4;
+      --color-accent: #3b4cc0;
+      --spacing: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body { font-family: system-ui, sans-serif; color: #333; line-height: 1.6; }
+
+    .header {
+      background: var(--color-dark);
+      color: white;
+      padding: 15px var(--spacing);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav ul { display: flex; list-style: none; gap: 20px; }
+    .nav a { color: white; text-decoration: none; }
+    .nav a:hover { text-decoration: underline; }
+
+    .intro { padding: 40px var(--spacing); text-align: center; background: #e8e8e8; }
+    .intro h2 { font-size: 32px; margin-bottom: 10px; }
+
+    .projets-section { padding: var(--spacing); }
+
+    .filtres-container { margin-bottom: 15px; display: flex; gap: 10px; }
+    
+    /* On transforme les spans en boutons propres */
+    .filtre {
+      padding: 5px 12px;
+      background: #ddd;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .filtre.actif {
+      background: var(--color-dark);
+      color: white;
+    }
+
+    .grille-projets {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+
+    .carte-projet {
+      border: 1px solid #ddd;
+      padding: 15px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 250px; /* Flexible mais avec un minimum */
+    }
+
+    .carte-tags span {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #e0e7ff;
+      color: var(--color-accent);
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 10px;
+    }
+
+    .carte-bouton {
+      margin-top: 15px;
+      padding: 8px 16px;
+      background: var(--color-dark);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Modale */
+    .modale-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 100;
+    }
+
+    .modale-overlay.is-active { display: flex; align-items: center; justify-content: center; }
+
+    .modale-contenu {
+      background: white;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .modale-fermer {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 28px;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .footer {
+      background: var(--color-dark);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <h1 class="titre">Portfolio</h1>
+  <nav class="nav">
+    <ul>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="intro">
+    <h2>Bienvenue sur mon portfolio</h2>
+    <p>Étudiante en MMI, passionnée par le web.</p>
+  </section>
+
+  <section class="projets-section" id="projets">
+    <h3>Mes projets</h3>
+
+    <div class="filtres-container">
+      <button class="filtre actif" onclick="filtrer(event, 'tous')">Tous</button>
+      <button class="filtre" onclick="filtrer(event, 'HTML')">HTML</button>
+      <button class="filtre" onclick="filtrer(event, 'CSS')">CSS</button>
+      <button class="filtre" onclick="filtrer(event, 'JS')">JS</button>
+    </div>
+
+    <div class="grille-projets" id="grille">
+      <!-- Généré par JS -->
+    </div>
+  </section>
+</main>
+
+<div class="modale-overlay" id="modale" aria-hidden="true" role="dialog">
+  <div class="modale-contenu">
+    <button class="modale-fermer" onclick="fermerModale()" aria-label="Fermer la modale">×</button>
+    <div id="modale-body"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>© 2026 - Mon portfolio corrigé</p>
+</footer>
+
+<script>
+  const projets = [
+    { id: 1, titre: "Site vitrine", description: "Un site pour une boulangerie locale.", tags: ["HTML", "CSS"] },
+    { id: 2, titre: "Quiz interactif", description: "Application de quiz avec score et timer.", tags: ["JS", "HTML"] },
+    { id: 3, titre: "Portfolio v1", description: "Ma première version de portfolio.", tags: ["HTML", "CSS"] },
+    { id: 4, titre: "Dashboard météo", description: "Tableau de bord météo avec API.", tags: ["JS", "CSS"] },
+    { id: 5, titre: "Blog tech", description: "Blog statique sur le développement web.", tags: ["HTML", "CSS", "JS"] },
+    { id: 6, titre: "Jeu du pendu", description: "Jeu du pendu en JavaScript vanilla.", tags: ["JS"] }
+  ];
+
+  const modale = document.querySelector('#modale');
+  const modaleBody = document.querySelector('#modale-body');
+
+  function afficherProjets(liste) {
+    const grille = document.querySelector('#grille');
+    grille.innerHTML = '';
+    liste.forEach(p => {
+      const carte = document.createElement('article'); // Article est plus sémantique pour une carte
+      carte.className = 'carte-projet';
+      carte.innerHTML = `
+        <div>
+          <h4 class="carte-titre">${p.titre}</h4>
+          <p class="carte-description">${p.description}</p>
+          <div class="carte-tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+        </div>
+        <button class="carte-bouton" onclick="ouvrirModale(${p.id})">Voir détail</button>
+      `;
+      grille.appendChild(carte);
+    });
+  }
+
+  function filtrer(ev, tag) {
+    document.querySelectorAll('.filtre').forEach(btn => btn.classList.remove('actif'));
+    ev.target.classList.add('actif');
+
+    const resultats = (tag === 'tous') ? projets : projets.filter(p => p.tags.includes(tag));
+    afficherProjets(resultats);
+  }
+
+  function ouvrirModale(id) {
+    const projet = projets.find(p => p.id === id);
+    if (!projet) return;
+
+    modaleBody.innerHTML = `
+      <h2>${projet.titre}</h2>
+      <p>${projet.description}</p>
+      <p><strong>Tags :</strong> ${projet.tags.join(', ')}</p>
+    `;
+
+    modale.classList.add('is-active');
+    modale.setAttribute('aria-hidden', 'false');
+  }
+
+  function fermerModale() {
+    modale.classList.remove('is-active');
+    modale.setAttribute('aria-hidden', 'true');
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === "Escape" && modale.classList.contains('is-active')) {
+      fermerModale();
+    }
+  });
+
+  // Initialisation
+  afficherProjets(projets);
+</script>
+
+</body>
+</html>
