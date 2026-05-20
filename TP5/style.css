@@ -1,0 +1,126 @@
+:root {
+  --primary: #2d3436;
+  --accent: #0984e3;
+  --bg: #dfe6e9;
+  --white: #ffffff;
+  --radius: 12px;
+  --shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--primary);
+  line-height: 1.6;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto; /* Centre tout le bloc main */
+  padding: 0 20px;
+}
+
+/* Layout */
+.main-header {
+  padding: 2rem;
+  text-align: center;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+nav ul { display: flex; justify-content: center; gap: 1.5rem; list-style: none; margin-top: 1rem; }
+nav a { text-decoration: none; color: var(--accent); font-weight: bold; }
+
+.grid {
+  display: grid;
+  padding: 2rem;
+  grid-template-columns: 1fr; /* Mobile */
+  gap: 1.5rem;
+}
+
+/* Tablette & Desktop */
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+}
+
+/* Cartes */
+article {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+article:hover { transform: translateY(-5px); }
+
+/* Filtres */
+.filters { text-align: center; margin-top: 2rem; }
+.filter-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 0.2rem;
+  background: var(--white);
+}
+
+.filter-btn.active { background: var(--accent); color: white; }
+
+/* Modale (Native <dialog>) */
+dialog {
+  border: none;
+  border-radius: var(--radius);
+  margin: auto;
+  padding: 2rem;
+  max-width: 500px;
+}
+dialog::backdrop { background: rgba(0,0,0,0.5); }
+
+/* AmÃ©liorations visuelles suggÃ©rÃ©es */
+.filter-btn, .view-details, #close-modal {
+  transition: all 0.3s ease; /* Transition douce pour les couleurs */
+}
+
+.filter-btn:hover {
+  background-color: var(--bg);
+  box-shadow: inset 0 0 0 2px var(--accent); /* Un petit contour au survol */
+}
+
+.view-details:hover {
+  background-color: var(--accent);
+  color: var(--white);
+  transform: scale(1.05); /* Effet d'agrandissement lÃ©ger */
+}
+
+/* AmÃ©lioration du focus pour l'accessibilitÃ© */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Style pour les boutons Ã  l'intÃ©rieur des cartes */
+.view-details {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px; /* Pour dÃ©coller du texte au-dessus */
+}
+
+/* On centre le titre de la section et les filtres */
+#projets h2 {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+/* Espacement du footer */
+footer {
+  text-align: center;
+  padding: 3rem 0;
+  opacity: 0.7;
+}
